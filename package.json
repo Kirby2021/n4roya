@@ -1,0 +1,28 @@
+{
+  "name": "n4roya",
+  "version": "1.0.0",
+  "description": "NAROYA????",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mallusrgreatv2/n4roya.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mallusrgreatv2/n4roya/issues"
+  },
+  "homepage": "https://github.com/mallusrgreatv2/n4roya#readme",
+  "dependencies": {
+    "consola": "^2.15.3",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "glob": "^7.1.7",
+    "moment": "^2.29.1",
+    "ms": "^2.1.3"
+  }
+}
