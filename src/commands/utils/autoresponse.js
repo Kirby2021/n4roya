@@ -1,4 +1,4 @@
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, MessageEmbed } = require("discord.js");
 const model = require("../../Util/models").autoResponse;
 module.exports = {
   name: "autoresponse",
@@ -36,6 +36,11 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "SUB_COMMAND",
+      name: "list",
+      description: "List all the autoresponses",
+    },
   ],
   /**
    *
@@ -52,6 +57,11 @@ module.exports = {
     const [subcommand] = args;
     switch (subcommand) {
       case "add":
+        if (!interaction.member.permissions.has("MANAGE_GUILD"))
+          return await interaction.editReply({
+            content: `You need \`MANAGE_GUILD\` permission to use this command`,
+            ephemeral: true,
+          });
         let exists = await model.findOne({
           Guild: interaction.guild.id,
           Query: interaction.options.data[0].options[0].value,
@@ -69,6 +79,11 @@ module.exports = {
         await interaction.editReply(`Autoresponse created.`);
         break;
       case "remove":
+        if (!interaction.member.permissions.has("MANAGE_GUILD"))
+          return await interaction.editReply({
+            content: `You need \`MANAGE_GUILD\` permission to use this command`,
+            ephemeral: true,
+          });
         let removeData = await model.findOne({
           Guild: interaction.guild.id,
           Query: interaction.options.data[0].options[0].value,
@@ -80,6 +95,16 @@ module.exports = {
           Query: interaction.options.data[0].options[0].value.toLowerCase(),
         });
         await interaction.editReply(`Successfully deleted autoresponse.`);
+        break;
+      case "list":
+        let all = await model.find({ Guild: interaction.guild.id });
+        const embed = new MessageEmbed().setTitle(`Autoresponses`);
+        all.forEach((e) => {
+          embed.addField(e.Query, e.Response, true);
+        });
+        await interaction.editReply({
+          embeds: [embed],
+        });
     }
   },
 };
