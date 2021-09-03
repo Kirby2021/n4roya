@@ -13,7 +13,25 @@ const reputation = model(
     },
   })
 );
+const autoResponse = model(
+  "autoresponse",
+  new Schema({
+    Guild: {
+      required: true,
+      type: SchemaTypes.String,
+    },
+    Query: {
+      required: true,
+      type: SchemaTypes.String,
+    },
+    Response: {
+      required: true,
+      type: SchemaTypes.String,
+    },
+  })
+);
 
 module.exports = {
   reputation,
+  autoResponse,
 };
