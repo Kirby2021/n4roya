@@ -31,6 +31,7 @@ module.exports = {
           name: "user",
           description: "User to show information of",
           type: "USER",
+          required: false,
         },
       ],
     },
@@ -109,6 +110,13 @@ module.exports = {
         const bans = await guild.bans.fetch();
         embed.addField(`Total bans`, bans.size.toLocaleString());
         await interaction.reply({ embeds: [embed] });
+        break;
+      case "user":
+        const user = interaction.options.getUser("user") || interaction.user
+        const userembed = new MessageEmbed()
+        .setTitle(`${user.tag}`)
+        .setThumbnail(user.avatarURL())
+        await interaction.reply({embeds: [userembed]})
         break;
     }
   },
