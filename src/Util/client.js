@@ -54,7 +54,7 @@ module.exports = class Naroya extends Client {
         return console.log(
           `File ${fileStr.split("/")[-1]} doesn't have a name`
         );
-      if (!file?.description)
+      if (!["USER", "MESSAGE"].includes(file.type) && !file?.description)
         return console.log(`Command ${file.name} doesn't have a description`);
       this.commands.set(file.name, file);
     });
