@@ -116,13 +116,17 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
         break;
       case "user":
-        const user = interaction.options.getUser("user") || interaction.user;
-        const userembed = new MessageEmbed().setTitle(user.tag).addField(
+        const user = interaction.options.getUser("user") || interaction.member;
+        const userembed = new MessageEmbed().setTitle(user).addField(
           `User`,
           outdent`
           ID: ${user.id}
           Account Created: ${Formatters.time(new Date(user.createdTimestamp))}
-          Joined: ${Formatters.time(new Date(user.joinedAt))}
+          
+          `
+          `Member`,
+          outdent`
+          Joined At: ${Formatters.time(new Date(user.joinedAt))}
           `
         );
         await interaction.reply({ embeds: [userembed] });
