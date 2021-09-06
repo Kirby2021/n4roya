@@ -45,7 +45,9 @@ module.exports = {
     switch (subcommand) {
       case "server":
         const { guild } = interaction;
-        await guild.members.cache.forEach((a) => a.fetch());
+        for (x of guild.members.cache) {
+          await x.fetch();
+        }
         await guild.fetch();
         const embed = new MessageEmbed()
           .setTitle(guild.name)
@@ -112,11 +114,10 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
         break;
       case "user":
-        const user = interaction.options.getUser("user") || interaction.user
+        const user = interaction.options.getUser("user") || interaction.user;
         const userembed = new MessageEmbed()
-        .setTitle(`${user.tag}`)
-        .setThumbnail(user.avatarURL())
-        await interaction.reply({embeds: [userembed]})
+          .setTitle(user.tag)
+          .addField(`User`);
         break;
     }
   },

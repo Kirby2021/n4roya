@@ -1,21 +1,21 @@
 const client = require("../..");
-const devs = ["700397009336533032", "790891465593192458"];
-client.on("messageCreate", async (msg) => {
-  const args = msg.content.trim().split(/ +/g);
-  const cmd = args.shift();
-  if (msg.mentions.members.has("837306535813054464"))
-    return msg.reply(`pogchampy = pog`);
-  if (!devs.includes(msg.author.id)) return;
+const devs = new Set(["700397009336533032", "790891465593192458"]);
+client.on("messageCreate", async (message) => {
+  const arguments_ = message.content.trim().split(/ +/g);
+  const cmd = arguments_.shift();
+  if (message.mentions.members.has("837306535813054464"))
+    return message.reply(`pogchampy = pog`);
+  if (!devs.includes(message.author.id)) return;
   if (cmd == "eval") {
     try {
-      const code = args.join(" ");
+      const code = arguments_.join(" ");
       const evaled = require("util").inspect(eval(code));
-      await msg.reply({
+      await message.reply({
         content: `\`\`\`js\n${evaled}\`\`\``,
       });
-    } catch (err) {
-      await msg.reply({
-        content: `\`\`\`js\n${err.message}\`\`\``,
+    } catch (error) {
+      await message.reply({
+        content: `\`\`\`js\n${error.message}\`\`\``,
       });
     }
   }

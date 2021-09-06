@@ -3,13 +3,13 @@ require("dotenv").config();
 const glob = require("util").promisify(require("glob"));
 const consola = require("consola");
 
-const loggingSystem = {
-  success: consola?.default?.success,
-  log: consola?.default?.log,
-  error: consola?.default?.error,
-  info: consola?.default?.info,
-  consola: consola?.default,
-};
+// const loggingSystem = {
+//   success: consola?.default?.success,
+//   log: consola?.default?.log,
+//   error: consola?.default?.error,
+//   info: consola?.default?.info,
+//   consola: consola?.default,
+// };
 module.exports = class Naroya extends Client {
   /**
    *
@@ -43,7 +43,7 @@ module.exports = class Naroya extends Client {
   }
   collections = require("./collections");
   supportGuild = `858377063009222726`;
-  logger = loggingSystem;
+  // logger = loggingSystem;
   commands = new Collection();
   initialize = async () => {
     this.login(process.env.TOKEN);

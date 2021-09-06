@@ -37,8 +37,10 @@ module.exports = {
       await interaction.editReply({
         content: `Kicked ${kick.username}.`,
       });
-    } catch (err) {
-      return await interaction.editReply(`Could not kick ${user.username}`);
+    } catch (error) {
+      return await interaction.editReply(
+        `Could not kick ${user.username}:\n${error.message}`
+      );
     }
   },
 };

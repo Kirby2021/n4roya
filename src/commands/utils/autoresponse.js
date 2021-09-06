@@ -49,12 +49,12 @@ module.exports = {
    */
   run: async ({ interaction }) => {
     await interaction.deferReply();
-    const args = interaction.options.data.reduce((accumulator, data) => {
+    const arguments_ = interaction.options.data.reduce((accumulator, data) => {
       if (data.value) accumulator.push(data.value);
       if (data.name) accumulator.push(data.name);
       return accumulator;
     }, []);
-    const [subcommand] = args;
+    const [subcommand] = arguments_;
     switch (subcommand) {
       case "add":
         if (!interaction.member.permissions.has("MANAGE_GUILD"))
@@ -99,9 +99,9 @@ module.exports = {
       case "list":
         let all = await model.find({ Guild: interaction.guild.id });
         const embed = new MessageEmbed().setTitle(`Autoresponses`);
-        all.forEach((e) => {
+        for (e of all) {
           embed.addField(e.Query, e.Response, true);
-        });
+        }
         await interaction.editReply({
           embeds: [embed],
         });

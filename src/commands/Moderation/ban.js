@@ -33,8 +33,10 @@ module.exports = {
       await interaction.editReply({
         content: `Banned ${ban.username}.`,
       });
-    } catch (err) {
-      return await interaction.editReply(`Could not ban ${user.username}`);
+    } catch (error) {
+      return await interaction.editReply(
+        `Could not ban ${user.username}:\n${error.message}`
+      );
     }
   },
 };

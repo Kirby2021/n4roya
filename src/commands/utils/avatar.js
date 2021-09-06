@@ -22,8 +22,8 @@ module.exports = {
         )
         .setImage(avatars["img"]);
       await interaction.editReply({ embeds: [embed], ephemeral: true });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   },
 };
