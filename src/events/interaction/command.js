@@ -13,11 +13,11 @@ client.on("interactionCreate", async (interaction) => {
       util: require("../../Util"),
     });
   } catch (error) {
-    interaction.reply({
-      content: `An error occured\n${error.message}`,
+    console.log(error.message, "\n", error.stack);
+    await interaction.reply({
       ephemeral: true,
+      content: `An error occured:\n${error.message}`,
     });
-    console.log(error);
     console.log(
       `User ${interaction.user.tag} tried running command ${command.name} but failed (ERROR)`
     );
