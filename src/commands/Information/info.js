@@ -122,6 +122,7 @@ module.exports = {
           outdent`
           ID: ${user.id}
           Account Created: ${Formatters.time(new Date(user.createdTimestamp))}
+          Joined: ${Formatters.time(new Date(user.joinedAt))}
           `
         );
         await interaction.reply({ embeds: [userembed] });
