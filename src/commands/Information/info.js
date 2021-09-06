@@ -1,5 +1,7 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { Formatters } = require("discord.js");
 
+const outdent = require("outdent");
 module.exports = {
   name: "info",
   description: "View information about the server or a role",
@@ -115,9 +117,14 @@ module.exports = {
         break;
       case "user":
         const user = interaction.options.getUser("user") || interaction.user;
-        const userembed = new MessageEmbed()
-          .setTitle(user.tag)
-          .addField(`User`);
+        const userembed = new MessageEmbed().setTitle(user.tag).addField(
+          `User`,
+          outdent`
+          ID: ${user.id}
+          Account Created: ${Formatters.time(new Date(user.createdTimestamp))}
+          `
+        );
+        await interaction.reply({ embeds: [userembed] });
         break;
     }
   },

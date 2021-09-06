@@ -5,7 +5,7 @@ client.on("messageCreate", async (message) => {
   const cmd = arguments_.shift();
   if (message.mentions.members.has("837306535813054464"))
     return message.reply(`pogchampy = pog`);
-  if (!devs.includes(message.author.id)) return;
+  if (!devs.has(message.author.id)) return;
   if (cmd == "eval") {
     try {
       const code = arguments_.join(" ");
