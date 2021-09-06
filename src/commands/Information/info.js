@@ -117,18 +117,18 @@ module.exports = {
         break;
       case "user":
         const user = interaction.options.getUser("user") || interaction.member;
-        const userembed = new MessageEmbed().setTitle(user).addField(
+        const userembed = new MessageEmbed().setTitle(interaction.user.member.discriminator).addField(
           `User`,
           outdent`
           ID: ${user.id}
           Account Created: ${Formatters.time(new Date(user.createdTimestamp))}
-          
           `
+        ).addField(
           `Member`,
           outdent`
-          Joined At: ${Formatters.time(new Date(user.joinedAt))}
+          Joined At: ${Formatters.time(new Date(user.member.joinedAt))}
           `
-        );
+        )
         await interaction.reply({ embeds: [userembed] });
         break;
     }
