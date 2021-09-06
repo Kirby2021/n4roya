@@ -116,19 +116,23 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
         break;
       case "user":
-        const user = interaction.options.getUser("user") || interaction.member;
-        const userembed = new MessageEmbed().setTitle(interaction.user.member.discriminator).addField(
-          `User`,
-          outdent`
+        const user = interaction.options.getUser("user") || interaction.user;
+        const member = interaction.guild.members.cache.get(user.id);
+        const userembed = new MessageEmbed()
+          .setTitle(interaction.user.member.discriminator)
+          .addField(
+            `User`,
+            outdent`
           ID: ${user.id}
           Account Created: ${Formatters.time(new Date(user.createdTimestamp))}
           `
-        ).addField(
-          `Member`,
-          outdent`
-          Joined At: ${Formatters.time(new Date(user.member.joinedAt))}
+          )
+          .addField(
+            `Member`,
+            outdent`
+          Joined At: ${Formatters.time(new Date(member.joinedTimestamp))}
           `
-        )
+          );
         await interaction.reply({ embeds: [userembed] });
         break;
     }
