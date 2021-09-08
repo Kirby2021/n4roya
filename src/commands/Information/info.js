@@ -34,7 +34,8 @@ module.exports = {
           description: "User to get information from",
           type:"USER",
           required: true,
-      }, {
+      }, 
+      {
           name: "ephemeral",
           description: "The output can only be viewed by yourself or not",
           type: "BOOLEAN",
@@ -136,7 +137,7 @@ module.exports = {
         let date = new Date(user.createdTimestamp);
         let member = interaction.guild.members.cache.get(user.id);
         let joinedDate = new Date(interaction.guild.members.cache.get(user.id).joinedTimestamp);
-        let owner = (await interaction.guild.fetchOwner({
+        let userowner = (await interaction.guild.fetchOwner({
             cache: true
         })).user;
         let userembed = new MessageEmbed()
@@ -150,7 +151,7 @@ module.exports = {
             `)
             .addField(`__Member__`, outdent`
             **Joined At**: \`${joinedDate.getDate()}/${joinedDate.getMonth()}/${joinedDate.getFullYear()} ${joinedDate.getHours()}:${joinedDate.getMinutes()}:${joinedDate.getSeconds()}\`
-            **Is Owner**: ${user.id == owner.id ? "Yes" : "No"}
+            **Is Owner**: ${user.id == userowner.id ? "Yes" : "No"}
             **Roles**: ${member.roles.cache.filter(s => s.id !== interaction.guild.id).map(role => role).join(", ")}
             `)
             .setThumbnail(avatar.dynamic)
